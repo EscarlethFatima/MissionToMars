@@ -26,4 +26,8 @@ public abstract class Rocket implements SpaceShip {
     public int getWeight() {
         return weight;
     }
+
+    public int getCost() {
+        return cost;
+    }
 }
