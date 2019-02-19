@@ -9,14 +9,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
 
 public class Simulation {
 
-    public Simulation() {
-    }
-
-    public ArrayList<Item> loadItems(String itemsFilePath) {
+    public ArrayList<Item> loadItems(String itemsFile) {
+        String itemsFilePath = String.format("%s%sresources%s%s",
+                                            System.getProperty("user.dir"), File.separator, File.separator, itemsFile);
         ArrayList<Item> itemsList = new ArrayList<>();
         try {
             File file = new File(itemsFilePath);
@@ -59,15 +57,13 @@ public class Simulation {
         return rocketsList;
     }
 
-    public int runSimulation(ArrayList<Rocket> rockets) {
-        int budget = 0;
-
-        //Loop through all rockets in the array
+    public double runSimulation(ArrayList<Rocket> rockets) {
+        double budget = 0;
         for (Rocket rocket : rockets) {
-            while (rocket.land() || rocket.launch()) {
-                budget = budget + rocket.getCost();
+            while (!rocket.land() || !rocket.launch()) {
+                budget += rocket.getCost();
             }
-            budget = budget + rocket.getCost();
+            budget += rocket.getCost();
         }
         return budget;
     }
