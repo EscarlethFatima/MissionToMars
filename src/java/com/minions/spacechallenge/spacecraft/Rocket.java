@@ -7,7 +7,7 @@ public abstract class Rocket implements SpaceShip {
     protected double weight;
     protected double maxWeight;
 
-    public Rocket(double cost, double weight, double maxWeight) {
+    Rocket(double cost, double weight, double maxWeight) {
         this.cost = cost;
         this.weight = weight;
         this.maxWeight = maxWeight;
