@@ -12,17 +12,12 @@ import java.util.Scanner;
 import java.util.Stack;
 
 public class Simulation {
-    private ArrayList<Item> itemsList;
 
     public Simulation() {
-        itemsList = new ArrayList<>();
-    }
-
-    public ArrayList<Item> getItemsList() {
-        return itemsList;
     }
 
     public ArrayList<Item> loadItems(String itemsFilePath) {
+        ArrayList<Item> itemsList = new ArrayList<>();
         try {
             File file = new File(itemsFilePath);
             Scanner scanner = new Scanner(file);
@@ -36,40 +31,40 @@ public class Simulation {
         return itemsList;
     }
 
-    public Stack<Rocket> loadU1(ArrayList<Item> itemsList) {
-        Stack<Rocket> rocketsList = new Stack<>();
-        rocketsList.push(new U1());
+    public ArrayList<Rocket> loadU1(ArrayList<Item> itemsList) {
+        ArrayList<Rocket> rocketsList = new ArrayList<>();
+        rocketsList.add(new U1());
         itemsList.forEach(item -> {
-            if (rocketsList.peek().canCarry(item)) {
-                rocketsList.peek().carry(item);
+            if (rocketsList.get(rocketsList.size() - 1).canCarry(item)) {
+                rocketsList.get(rocketsList.size() - 1).carry(item);
             } else {
-                rocketsList.push(new U1());
+                rocketsList.add(new U1());
             }
         });
 
         return rocketsList;
     }
 
-    public Stack<Rocket> loadU2(ArrayList<Item> itemsList) {
-        Stack<Rocket> rocketsList = new Stack<>();
-        rocketsList.push(new U2());
+    public ArrayList<Rocket> loadU2(ArrayList<Item> itemsList) {
+        ArrayList<Rocket> rocketsList = new ArrayList<>();
+        rocketsList.add(new U2());
         itemsList.forEach(item -> {
-            if (rocketsList.peek().canCarry(item)) {
-                rocketsList.peek().carry(item);
+            if (rocketsList.get(rocketsList.size() - 1).canCarry(item)) {
+                rocketsList.get(rocketsList.size() - 1).carry(item);
             } else {
-                rocketsList.push(new U2());
+                rocketsList.add(new U2());
             }
         });
 
         return rocketsList;
     }
 
-    public int runSimulation(Stack<Rocket> rockets) {
+    public int runSimulation(ArrayList<Rocket> rockets) {
         int budget = 0;
 
         //Loop through all rockets in the array
         for (Rocket rocket : rockets) {
-            while (!rocket.land() || !rocket.launch()) {
+            while (rocket.land() || rocket.launch()) {
                 budget = budget + rocket.getCost();
             }
             budget = budget + rocket.getCost();
