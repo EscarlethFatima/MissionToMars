@@ -3,11 +3,11 @@ package com.minions.spacechallenge.spacecraft;
 import com.minions.spacechallenge.item.Item;
 
 public abstract class Rocket implements SpaceShip {
-    protected int cost;
-    protected int weight;
-    protected int maxWeight;
+    protected double cost;
+    protected double weight;
+    protected double maxWeight;
 
-    public Rocket(int cost, int weight, int maxWeight) {
+    public Rocket(double cost, double weight, double maxWeight) {
         this.cost = cost;
         this.weight = weight;
         this.maxWeight = maxWeight;
@@ -23,11 +23,7 @@ public abstract class Rocket implements SpaceShip {
         weight += item.getWeight();
     }
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public int getCost() {
+    public double getCost() {
         return cost;
     }
 }

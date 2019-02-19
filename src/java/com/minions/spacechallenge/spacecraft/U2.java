@@ -7,11 +7,11 @@ public class U2 extends Rocket {
 
     @Override
     public boolean launch() {
-        return Math.random() < 0.04 * (weight / maxWeight);
+        return Math.random() > 0.04 * (weight / maxWeight);
     }
 
     @Override
     public boolean land() {
-        return Math.random() < 0.08 * (weight / maxWeight);
+        return Math.random() > 0.08 * (weight / maxWeight);
     }
 }
